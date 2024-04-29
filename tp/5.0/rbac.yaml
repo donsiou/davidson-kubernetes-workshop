@@ -1,0 +1,24 @@
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: resourcequota-writer
+rules:
+- apiGroups: [""]
+  resources: ["resourcequotas"]
+  verbs: ["get", "list", "watch", "create", "update"]  # Define the actions the service account can perform
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: write-resourcequota
+subjects:
+- kind: ServiceAccount
+  name: ${USER_NAME}  # The default service account
+roleRef:
+  kind: Role
+  name: resourcequota-writer
+  apiGroup: rbac.authorization.k8s.io

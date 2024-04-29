@@ -1,0 +1,90 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: helm-museum
+  namespace: ${EKS_NAMESPACE}
+spec:
+  interval: 5m0s
+  provider: aws
+  timeout: 60s
+  type: oci
+  url: oci://614303399241.dkr.ecr.eu-west-1.amazonaws.com/helm-museum
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ${USER_NAME}
+  namespace: ${EKS_NAMESPACE}
+spec:
+  chart:
+    spec:
+      chart: discoveryit-helm-chart-generic
+      interval: 1m
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: helm-museum
+        namespace: ${EKS_NAMESPACE}
+      version: 1.3.1
+  interval: 5m
+  values:
+    applicationName: ${USER_NAME}
+    image:
+      repository: 614303399241.dkr.ecr.eu-west-1.amazonaws.com/dsfoperations-infra-eks-formation
+      tag: 1.0.0 # {"$imagepolicy": "${EKS_NAMESPACE}:${USER_NAME}:tag"}
+      pullAutomation:
+        enabled: true
+        policy:
+          semver:
+            range: '>=1.0.0'
+        gitRepositoryNamespace: formation
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+        scheme: HTTP
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+        scheme: HTTP
+    networkPolicies:
+      ingress: true
+      egress: true
+    service:
+      enabled: true
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+      hosts:
+      - host: formation-eks-dataplatform.dktapp.cloud
+        paths:
+          - path: /${USER_NAME}(/|$)(.*)
+            pathType: ImplementationSpecific
+    envVariables:
+      NAMESPACE: ${EKS_NAMESPACE}
+      DEEP_DIVE: "True"
+    envFrom:
+      - type: configmap
+        name: config-html
+      - type: secret
+        name: ${USER_NAME}
+    configmaps:
+      enabled: true
+      items:
+        - name: config-html
+          data:
+            IS_HTML: "true"
+            home.html: |
+              <h6> It works ✅</h6>
+    volumes:
+      configMaps:
+        - name: config-html
+          mountPath: "/config"
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::614303399241:role/BIGDATA-EKS-DSFOPERATIONS-INFRA-PP
+    
+      
