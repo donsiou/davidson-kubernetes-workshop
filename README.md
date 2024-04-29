@@ -9,3 +9,7 @@ To achieve this objective, we will deploy the following application: kubernetes-
 Initially, we will deploy this application and expose it with a DNS. Then, we will follow the tasks it prompts us to complete.
 
 In case of any obstacles, this GitHub repository contains solutions for each step.
+
+## Steps
+
+- Check [Commands](commands.md)
