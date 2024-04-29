@@ -1,4 +1,4 @@
-# Davidson Kubernetes WORKSHOP : The basics of Kubernetes and how to deploy your application in Dataplatform clusters
+# DAVIDSON KUBERNETES WORKSHOP : The basics of Kubernetes and how to deploy your application in a Kubernetes cluster
 
 ## Introduction
 
