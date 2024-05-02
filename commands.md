@@ -193,14 +193,13 @@ kubectl get service $USER_NAME -n $EKS_NAMESPACE
 # NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 # z18oelkh   ClusterIP   172.20.17.191   <none>        80/TCP    2m28s
 
-# 2- Get the ingress
-kubectl get ingress $USER_NAME -n $EKS_NAMESPACE
-## Example expected output
-# NAME       CLASS   HOSTS                                     ADDRESS   PORTS   AGE
-# z18oelkh   nginx   formation-eks-dataplatform.dktapp.cloud             80      18s
+## Expose service
+kubectl port-forward -n $EKS_NAMESPACE service/$USER_NAME 8080:8080 1> /dev/null 2> /dev/null & 
 ```
 
-## TP 4.1: Expose your application
+- Go to http://127.0.0.1:8080
+
+## TP 4.1: Updating a running application 
 
 ```bash
 envsubst < <(cat tp/4.1/*.yaml) | kubectl apply -n $EKS_NAMESPACE -f -
@@ -308,8 +307,6 @@ kubectl get rolebinding -n $EKS_NAMESPACE write-resourcequota
 
 ## !! :warning: CLEAN RESOURCES :warning: !!
 
-Before proceeding, make sure to clean up resources. This helps ensure a fresh start without any lingering configurations or deployments.
-
 ```bash
 
 # 1- Delete all resources we created in privious steps
@@ -321,31 +318,4 @@ kubectl get all -n $EKS_NAMESPACE
 # No resources found in formation-z18oelkh namespace.
 ```
 
-## TP 7.0: Deploy with Flux
-```bash
-envsubst < <(cat tp/5.0/*.yaml) > $USER_NAME/auto/$USER_NAME-app.yaml
-```
 
-```bash
-kubectl delete deploy $USER_NAME -n $EKS_NAMESPACE
-```
-
-```bash
-rm  $USER_NAME/auto/$USER_NAME-app.yaml
-```
-
-## TP 7.1: Deploy my App With an Helm Release
-```bash
-kubectl create secret generic $USER_NAME --from-literal=TOKEN=zdskvifush -n $EKS_NAMESPACE
-envsubst < <(cat tp/7.1/*.yaml) > $USER_NAME/auto/$USER_NAME-app.yaml
-```
-
-## TP 8.0 IAM Role for Service Account
-```bash
-envsubst < <(cat tp/8.0/*.yaml) > $USER_NAME/auto/$USER_NAME-app.yaml
-```
-
-## TP 9.0: Image Update Automation
-```bash
-imagepolicy='$imagepolicy' envsubst < <(cat tp/9.0/*.yaml) > $USER_NAME/auto/$USER_NAME-app.yaml 
-```
