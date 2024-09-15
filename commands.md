@@ -1,58 +1,16 @@
 # Commands
 
-## Pre-requests
-
-- [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
-- [Install Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
-- 
-
-
 ## Setup your environment
 
-### Configure AWS CLI access
+### Local Setup
 
-```bash
-aws configure
-# AWS Access Key ID : (Will be given to you in teams chat)
-# AWS Secret Access Key : (Will be given to you in teams chat)
-# Default region name : us-east-1
-# Default output format : (Let empty and press enter)
+- We will use a CDE (Cloud Development Environment) for this Formation, you dont have to configure your localhost, everything will run in the browser
+- If you want, you can configure your localhost by following [This docs](setup.md)
 
-aws sts get-caller-identity
-# # Expected output
-# {
-#     "UserId": "AIDAW7EEDBPFIQMH3WCTZ",
-#     "Account": "479165877194",
-#     "Arn": "arn:aws:iam::479165877194:user/user"
-# }
-
-```
-
-### Configure Kubernetes Access
-  
-```bash
-
-# Configure kubectl to access davidson-eks-cluster
-aws eks --region us-east-1 update-kubeconfig \
-    --name davidson-eks-cluster
-
-# Check if cluster has been added succefully
-kubectl config current-context
-# # Expected output
-# arn:aws:eks:us-east-1:479165877194:cluster/davidson-eks-cluster
-
-# Try random kubectl command to check if it works
-kubectl get namespace default
-# # Expected output
-# NAME      STATUS   AGE
-# default   Active   26m
-
-```
 ## Prepare working environment
 
 ```bash
-git clone https://github.com/donsiou/davidson-kubernetes-workshop.git
-
+# Change to your firstname, for composed names use only the first part (Ex: Jean for Jean Luc)
 export USER_NAME="<your-firstname-in-lowercase>"
 export EKS_NAMESPACE=formation-$USER_NAME
 ```
@@ -69,6 +27,10 @@ kubectl describe namespace $EKS_NAMESPACE
 ```
 
 ## TP 1.0: Deploy a simple pod
+
+- Replace the environment variables with their corresponding values in this file : [demo-app-pod.yaml](tp/1.0/demo-app-pod.yaml)
+
+- Apply the configuration
 
 ```bash
 
