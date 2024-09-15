@@ -13,6 +13,7 @@
 # Change to your firstname, for composed names use only the first part (Ex: Jean for Jean Luc)
 export USER_NAME="<your-firstname-in-lowercase>"
 export EKS_NAMESPACE=formation-$USER_NAME
+cd ~/davidson-kubernetes-workshop
 ```
 
 ## TP 0 : Accessing your namespace
@@ -240,7 +241,7 @@ export POD_NAME=$(kubectl get pods -n $EKS_NAMESPACE --selector=app=$USER_NAME -
 # 4- Check if env var has been added to this pod
 kubectl exec -n $EKS_NAMESPACE $POD_NAME -- printenv TOKEN
 ## Expected output (Pod will be recreated)
-# true
+# zqkjsdnq
 ```
 
 ## TP 5.0: Using RBAC
