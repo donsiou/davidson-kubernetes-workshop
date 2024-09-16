@@ -2,9 +2,21 @@
 
 ## Setup your environment
 
-### Local Setup
+### Remote config
 
 - We will use a CDE (Cloud Development Environment) for this Formation, you dont have to configure your localhost, everything will run in the browser
+- Go to https://coder.el-khayali.com
+- You identifier for this formation is your lastname in lower case, for composed names use "-" instead of space (Ex EL KHAYALI => el-khayali)
+- Login using those credentials
+    - **Email**: {YOU-LAST-NAME-LOWERCASE}@gmail.com
+        - It's not a real mail, its just a random Account name
+        - *Example: el-khayali@gmail.com*
+    - **Password**: {YOU-LAST-NAME-LOWERCASE}@2024
+        - *Example: el-khayali@2024*
+
+### Local Setup
+
+
 - If you want, you can configure your localhost by following [This docs](setup.md)
 
 ## Prepare working environment
