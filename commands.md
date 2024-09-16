@@ -14,8 +14,15 @@
     - **Password**: {YOU-LAST-NAME-LOWERCASE}@2024
         - *Example: el-khayali@2024*
 
-### Local Setup
+- In the navigation bar go to **Templates**
+- Click on **kubernetes-template**
+- Click on **Create Workspace** Button
+- In the **Workspace Name** field, enter : formation-{YOU-LAST-NAME-LOWERCASE}  (Ex: formation-el-khayali)
+- Keep other checkbox as they are
+- Hit create Workspace, and wait for workspace creation
+- Click on **coder-server** to open the IDE that will be used for our training
 
+### Local Setup
 
 - If you want, you can configure your localhost by following [This docs](setup.md)
 
