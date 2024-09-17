@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define a global list of fedids
-fedid_list=("z23ataba" "akhald20" "alecar15" "abelmi19" "z08fbois" "gdelbe24" "z08jbech" "mmazoy08" "z03mlafr" "z08mkemm" "mtayab16" "z24mazan" "z14rcaro" "ssalhi26" "z24slarr" "z25tpont" "xnguye26" "z18oelkh" "z26adiev")
+fedid_list=("user-1" "user-2")
 
 
 
