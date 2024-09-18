@@ -168,18 +168,32 @@ kubectl get events --field-selector involvedObject.name=$POD_NAME -n $EKS_NAMESP
 
 ```bash
 envsubst < <(cat tp/3.0/*.yaml) | kubectl apply -n $EKS_NAMESPACE -f -
+```
 
+### Service
+
+```bash
 # 1- Get the service
 kubectl get service $USER_NAME -n $EKS_NAMESPACE
 ## Example expected output
-# NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-# z18oelkh   ClusterIP   172.20.17.191   <none>        80/TCP    2m28s
+# NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+# el-khayali   ClusterIP   172.20.42.124   <none>        8080/TCP   75s
 
 ## Expose service
 kubectl port-forward -n $EKS_NAMESPACE service/$USER_NAME 8080:8080 1> /dev/null 2> /dev/null & 
 ```
 
 - Go to http://127.0.0.1:8080
+
+### Ingress
+
+```bash
+# 1- Get the Ingress
+kubectl get ingress $USER_NAME -n $EKS_NAMESPACE
+
+
+```
+
 
 ## TP 4.1: Updating a running application 
 
