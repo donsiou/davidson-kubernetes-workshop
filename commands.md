@@ -190,9 +190,14 @@ kubectl port-forward -n $EKS_NAMESPACE service/$USER_NAME 8080:8080 1> /dev/null
 ```bash
 # 1- Get the Ingress
 kubectl get ingress $USER_NAME -n $EKS_NAMESPACE
+## Example expected output
+# NAME         CLASS               HOSTS                       ADDRESS                                                PORTS   AGE
+# el-khayali   aws-ingress-class   el-khayali.el-khayali.com   ingress-basics-721317054.us-east-1.elb.amazonaws.com   80      8m7s
 
-
+# You can see your DNS Above in HOSTS (el-khayali.el-khayali.com )
 ```
+
+- Open this URL in the browser: {CHANGE-TO-YOUR-LASTNME}.el-khayali.com
 
 
 ## TP 4.1: Updating a running application 
@@ -204,10 +209,10 @@ envsubst < <(cat tp/4.1/*.yaml) | kubectl apply -n $EKS_NAMESPACE -f -
 kubectl get pods -n $EKS_NAMESPACE -l app=$USER_NAME
 ## Expected output (Pod will be recreated)
 # NAME                        READY   STATUS    RESTARTS   AGE
-# z18oelkh-6c68c59896-7q5q8   1/1     Terminating   0          74m
-# z18oelkh-6c68c59896-vvcxs   1/1     Terminating   0          46m
-# z18oelkh-7cccc94478-s2249   1/1     Running       0          45s
-# z18oelkh-7cccc94478-tp8jg   1/1     Running       0          29s
+# el-khayali-6c68c59896-7q5q8   1/1     Terminating   0          74m
+# el-khayali-6c68c59896-vvcxs   1/1     Terminating   0          46m
+# el-khayali-7cccc94478-s2249   1/1     Running       0          45s
+# el-khayali-7cccc94478-tp8jg   1/1     Running       0          29s
 
 # Wait for old Pod Termination
 
@@ -217,7 +222,7 @@ export POD_NAME=$(kubectl get pods -n $EKS_NAMESPACE --selector=app=$USER_NAME -
 # 4- Check if env var has been added to this pod
 kubectl exec -n $EKS_NAMESPACE $POD_NAME -- printenv NAMESPACE
 ## Expected output (Pod will be recreated)
-# formation-z18oelkh
+# formation-el-khayali
 ```
 
 ## TP 4.2: Using a configmap
@@ -249,6 +254,8 @@ kubectl exec -n $EKS_NAMESPACE $POD_NAME -- cat /config/home.html
 ## Expected output (Pod will be recreated)
 # formation-z18oelkh
 ```
+
+- Go to the `tp/4.2/demo-app-cm.yaml` file and change home.html content, what happens ?
 
 ## TP 4.3: Using a secret
 
