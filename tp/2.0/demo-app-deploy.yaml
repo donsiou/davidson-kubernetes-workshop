@@ -15,26 +15,19 @@ spec:
     metadata:
       labels:
         app: ${USER_NAME}
-        egress.networking.k8s.io: "true"
-        ingress.networking.k8s.io: "true"
     spec:
       containers:
-      - name: demo-app
-        image: 479165877194.dkr.ecr.us-east-1.amazonaws.com/eks-demo-app:latest
-        
-        ports:
-        - name: web
-          containerPort: 8080
-          protocol: TCP
-        resources:
-          limits:
-            cpu: 100m
-            memory: 100Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        
-        securityContext:
-          runAsUser: 1000
-          runAsNonRoot: true
-          allowPrivilegeEscalation: false
+        - name: demo-app
+          image: 479165877194.dkr.ecr.us-east-1.amazonaws.com/eks-demo-app:latest
+
+          ports:
+            - name: web
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
