@@ -3,7 +3,7 @@
 ## Prepare working environment
 
 ```bash
-# Change to your firstname, for composed names use only the first part (Ex: Jean for Jean Luc)
+# Change to your lastname, for composed names use "-" instead of space, ex EL KHAYALI -> el-khayali
 export USER_NAME="<your-firstname-in-lowercase>"
 export EKS_NAMESPACE=formation-$USER_NAME
 cd ~/davidson-kubernetes-workshop
