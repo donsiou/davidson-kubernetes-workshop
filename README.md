@@ -30,7 +30,7 @@ In case of any obstacles, this GitHub repository contains solutions for each ste
 - In the **Workspace Name** field, enter : formation-{YOU-LAST-NAME-LOWERCASE}  (Ex: formation-el-khayali)
 - Keep other checkbox as they are
 - Hit create Workspace, and wait for workspace creation
-- Click on **coder-server** to open the IDE that will be used for our training
+- Click on **workshop** to open the IDE that will be used for our training
 
 ### Local Setup
 
