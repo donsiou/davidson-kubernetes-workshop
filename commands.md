@@ -6,6 +6,7 @@
 # Change to your lastname, for composed names use "-" instead of space, ex EL KHAYALI -> el-khayali
 export USER_NAME="<your-lastname-in-lowercase>"
 export EKS_NAMESPACE=formation-$USER_NAME
+cd davidson-kubernetes-workshop
 ```
 
 ---
